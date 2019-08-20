@@ -31,3 +31,19 @@
     transform: rotate(360deg);
   }
 }
+
+nav li {
+  list-style-type: none;
+}
+
+.candidates {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 80%;
+  justify-content: center;
+}
+
+.candidates img {
+  object-fit: contain;
+}
