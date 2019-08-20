@@ -68,6 +68,7 @@ export default class EditCandidate extends Component {
     if (response.status === 200) {
       this.setState({ success: true });
       setTimeout(() => this.setState({ success: false }), 3000);
+      window.location.href = "http://localhost:3000/candidates/";
     }
   };
 
@@ -199,7 +200,6 @@ function SuccessMessage(props) {
 
   return (
     <div>
-      {/* <Button onClick={handleClick({ vertical: 'top', horizontal: 'center' })}>Top-Center</Button> */}
       <Snackbar
         anchorOrigin={{ vertical, horizontal }}
         key={`${vertical},${horizontal}`}
@@ -208,7 +208,6 @@ function SuccessMessage(props) {
           "aria-describedby": "message-id"
         }}
         message={<span id="message-id">Edit successful!</span>}
-        style={{ backgroundColor: "green" }}
       />
     </div>
   );

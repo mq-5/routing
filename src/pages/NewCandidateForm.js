@@ -14,7 +14,8 @@ export default class NewCandidateForm extends Component {
       gender,
       country,
       jobTitle,
-      company
+      company,
+      profilePic
     } = this.state;
     const data = {
       first_name: firstName,
@@ -23,7 +24,8 @@ export default class NewCandidateForm extends Component {
       gender,
       country,
       job_title: jobTitle,
-      company
+      company,
+      profile_pic_url: profilePic
     };
     const config = {
       method: "POST",
@@ -37,7 +39,12 @@ export default class NewCandidateForm extends Component {
       referrer: "no-referrer",
       body: JSON.stringify(data)
     };
-    fetch("http://localhost:3001/candidates", config);
+    fetch("http://localhost:3001/candidates", config).then(response => {
+      if (response.ok) {
+        alert("Submit successfully!");
+        window.location.href = "http://localhost:3000/candidates/";
+      }
+    });
   };
   render() {
     return (
@@ -53,16 +60,8 @@ export default class NewCandidateForm extends Component {
             onChange={e => this.setState({ lastName: e.target.value })}
           />
           <OutlinedInput
-            label="Email"
-            onChange={e => this.setState({ email: e.target.value })}
-          />
-          <OutlinedInput
             label="Gender"
             onChange={e => this.setState({ gender: e.target.value })}
-          />
-          <OutlinedInput
-            label="Country"
-            onChange={e => this.setState({ country: e.target.value })}
           />
           <OutlinedInput
             label="Job Title"
@@ -71,6 +70,18 @@ export default class NewCandidateForm extends Component {
           <OutlinedInput
             label="Company"
             onChange={e => this.setState({ company: e.target.value })}
+          />
+          <OutlinedInput
+            label="Email"
+            onChange={e => this.setState({ email: e.target.value })}
+          />
+          <OutlinedInput
+            label="Country"
+            onChange={e => this.setState({ country: e.target.value })}
+          />
+          <OutlinedInput
+            label="Profile Picture URL"
+            onChange={e => this.setState({ profilePic: e.target.value })}
           />
         </Box>
         <Button
@@ -106,6 +117,7 @@ function OutlinedInput(props) {
         className={clsx(classes.margin, classes.textField)}
         variant="outlined"
         label={props.label}
+        onChange={props.onChange}
       />
     </div>
   );

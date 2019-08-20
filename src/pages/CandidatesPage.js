@@ -33,8 +33,14 @@ export default class CandidatesPage extends Component {
       redirect: "follow",
       referrer: "no-referrer"
     };
-    fetch(`http://localhost:3001/candidates/${id}`, config);
-    this.fetchData();
+    fetch(`http://localhost:3001/candidates/${id}`, config).then(response => {
+      if (response.ok) {
+        alert(`Candidate ${id} was deleted`);
+        this.fetchData();
+      } else {
+        alert(response.statusText);
+      }
+    });
   };
 
   render() {
