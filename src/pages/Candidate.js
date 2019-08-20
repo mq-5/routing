@@ -52,6 +52,10 @@ function MiddleDividers(props) {
     <Container>
       <div className={classes.root}>
         <div className={classes.section1}>
+          <img
+            src={info.profile_pic_url}
+            style={{ height: 150, marginBottom: 20 }}
+          />
           <Grid container alignItems="center">
             <Grid item xs>
               <Typography gutterBottom variant="h4">

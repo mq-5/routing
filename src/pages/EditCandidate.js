@@ -3,18 +3,12 @@ import clsx from "clsx";
 
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import {
-  Container,
-  Box,
-  Button,
-  MenuItem,
-  InputAdornment
-} from "@material-ui/core";
+import { Container, Box, Button, MenuItem, Snackbar } from "@material-ui/core";
 
 export default class EditCandidate extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { success: false };
   }
 
   async componentDidMount() {
@@ -29,11 +23,12 @@ export default class EditCandidate extends Component {
       gender: data.gender,
       country: data.country,
       jobTitle: data.job_title,
-      company: data.company
+      company: data.company,
+      profilePic: data.profile_pic_url
     });
   }
 
-  editProfile = () => {
+  editProfile = async () => {
     const {
       email,
       gender,
@@ -41,7 +36,8 @@ export default class EditCandidate extends Component {
       lastName,
       jobTitle,
       firstName,
-      company
+      company,
+      profilePic
     } = this.state;
     const data = {
       email: email,
@@ -50,7 +46,8 @@ export default class EditCandidate extends Component {
       company: company,
       last_name: lastName,
       job_title: jobTitle,
-      first_name: firstName
+      first_name: firstName,
+      profile_pic_url: profilePic
     };
     const config = {
       method: "PATCH",
@@ -64,11 +61,14 @@ export default class EditCandidate extends Component {
       referrer: "no-referrer",
       body: JSON.stringify(data)
     };
-    let response = fetch(
+    let response = await fetch(
       `http://localhost:3001/candidates/${this.props.match.params.id}`,
       config
     );
-    console.log("RESPONSE", response, config.body);
+    if (response.status === 200) {
+      this.setState({ success: true });
+      setTimeout(() => this.setState({ success: false }), 3000);
+    }
   };
 
   render() {
@@ -76,6 +76,7 @@ export default class EditCandidate extends Component {
     return (
       <Container maxWidth="md">
         <h2 color="blue">Edit Profile</h2>
+        <SuccessMessage open={this.state.success} />
         <Box display="flex" justifyContent="center" flexWrap="wrap">
           <OutlinedInput
             label="First Name"
@@ -111,6 +112,11 @@ export default class EditCandidate extends Component {
             label="Country"
             value={this.state.country}
             onChange={e => this.setState({ country: e.target.value })}
+          />
+          <OutlinedInput
+            label="Profile Picture"
+            value={this.state.profile_pic_url}
+            onChange={e => this.setState({ profilePic: e.target.value })}
           />
         </Box>
         <Button
@@ -180,5 +186,30 @@ function SelectInput(props) {
         ))}
       </TextField>
     </Box>
+  );
+}
+
+function SuccessMessage(props) {
+  const [state, setState] = React.useState({
+    vertical: "top",
+    horizontal: "center"
+  });
+
+  const { vertical, horizontal } = state;
+
+  return (
+    <div>
+      {/* <Button onClick={handleClick({ vertical: 'top', horizontal: 'center' })}>Top-Center</Button> */}
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        key={`${vertical},${horizontal}`}
+        open={props.open}
+        ContentProps={{
+          "aria-describedby": "message-id"
+        }}
+        message={<span id="message-id">Edit successful!</span>}
+        style={{ backgroundColor: "green" }}
+      />
+    </div>
   );
 }
