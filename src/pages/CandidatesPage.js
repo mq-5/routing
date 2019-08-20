@@ -12,12 +12,30 @@ import Typography from "@material-ui/core/Typography";
 
 export default class CandidatesPage extends Component {
   state = { candidates: [] };
-  async componentDidMount() {
+  componentDidMount() {
+    this.fetchData();
+  }
+  fetchData = async () => {
     const response = await fetch("http://localhost:3001/candidates");
     const data = await response.json();
-    console.log("Candidates", data);
     this.setState({ candidates: data });
-  }
+  };
+
+  deleteProfile = id => {
+    const config = {
+      method: "DELETE",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      redirect: "follow",
+      referrer: "no-referrer"
+    };
+    fetch(`http://localhost:3001/candidates/${id}`, config);
+    this.fetchData();
+  };
 
   render() {
     return (
@@ -46,7 +64,14 @@ export default class CandidatesPage extends Component {
                   </Typography>
                 </CardContent>
               </CardActionArea>
-              <CardActions align="center">
+              <CardActions style={{ backgroundColor: "#eeeeee" }}>
+                <Button
+                  size="small"
+                  color="primary"
+                  href={`/candidates/${candidate.id}/`}
+                >
+                  More
+                </Button>
                 <Button
                   size="small"
                   color="primary"
@@ -56,10 +81,10 @@ export default class CandidatesPage extends Component {
                 </Button>
                 <Button
                   size="small"
-                  color="primary"
-                  href={`/candidates/${candidate.id}/`}
+                  color="secondary"
+                  onClick={() => this.deleteProfile(candidate.id)}
                 >
-                  More
+                  Delete
                 </Button>
               </CardActions>
             </Card>

@@ -38,16 +38,6 @@
       "profile_pic_url": "https://robohash.org/consequaturoccaecatinihil.jpg?size=50x50&set=set1"
     },
     {
-      "id": 70,
-      "first_name": "Thang",
-      "last_name": "long",
-      "company": "fdafdaf",
-      "email": "thaikhoamyquyen@gmail.com",
-      "country": "Vietnam",
-      "job_title": "Nguyễn",
-      "gender": "male"
-    },
-    {
       "id": 71,
       "email": "haihaihai@gmail.com",
       "gender": "Male",
@@ -219,25 +209,6 @@
         }
       ],
       "profile_pic_url": "https://robohash.org/dolorenimexercitationem.png?size=50x50&set=set1"
-    },
-    {
-      "id": 78,
-      "first_name": "Aili",
-      "last_name": "Chittey",
-      "email": "achittey25@stanford.edu",
-      "gender": "Female",
-      "country": "Sweden",
-      "job_title": "VP Accounting",
-      "company": "Oozz",
-      "locations": [
-        {
-          "city": "Rafael Hernandez Ochoa"
-        },
-        {
-          "city": "Qitai"
-        }
-      ],
-      "profile_pic_url": "https://robohash.org/officiissolutaillum.png?size=50x50&set=set1"
     },
     {
       "id": 79,
