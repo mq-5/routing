@@ -47,3 +47,13 @@ nav li {
 .candidates img {
   object-fit: contain;
 }
+
+.edit-input {
+  width: 30%;
+  height: 80px;
+  margin: 1rem !important;
+  text-align: left;
+}
+.edit-input label {
+  color: grey;
+}

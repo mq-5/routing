@@ -22,7 +22,7 @@ export default class CandidatesPage extends Component {
   render() {
     return (
       <div className="candidates">
-        {this.state.candidates.slice(0, 100).map(candidate => {
+        {this.state.candidates.map(candidate => {
           return (
             <Card className="card" style={{ width: 250, margin: "1rem   " }}>
               <CardActionArea>
@@ -42,7 +42,7 @@ export default class CandidatesPage extends Component {
                     color="textSecondary"
                     component="p"
                   >
-                    ID: {candidate.id}
+                    #{candidate.id}
                   </Typography>
                 </CardContent>
               </CardActionArea>
